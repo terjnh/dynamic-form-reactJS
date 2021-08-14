@@ -1,0 +1,28 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+label {
+  min-width: 200px;
+  display: inline-block;
+  padding-right: 10px;
+  text-align: right;
+}
+
+/* Field.jsx */
+hr.break-sm {
+  background: transparent;
+    color: transparent;
+    margin: 0px;
+    border-style: solid;
+    height: 2vw;
+}
+
+hr.break-xsm {
+  background: transparent;
+    color: transparent;
+    margin: 0px;
+    border-style: solid;
+    height: 1vw;
+}

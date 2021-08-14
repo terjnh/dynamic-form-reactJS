@@ -1,0 +1,125 @@
+{
+  "executionType": "sequential",
+  "tests": [
+    {
+      "id": "TEST1",
+      "name": "TEST1_name",
+      "message": "TEST1_MESSAGE",
+      "enabled": "true",
+      "subtests": {
+        "executionType": "sequential",
+        "tests": [
+          {
+            "id": "TEST1_SUBTEST1",
+            "name": "TEST1_SUBTEST1_name",
+            "message": "TEST1_SUBTEST1_message",
+            "enabled": "true",
+            "typeCommand": "PassFail",
+            "userInput": {
+              "type": "boolean"
+            },
+            "commandResult": {
+              "dataType": "boolean"
+            }
+          },
+          {
+            "id": "TEST1_SUBTEST2",
+            "name": "TEST1_SUBTEST2_name",
+            "message": "TEST1_SUBTEST2_message",
+            "enabled": "true",
+            "typeCommand": "PassFail",
+            "userInput": {
+              "type": "boolean"
+            },
+            "commandResult": {
+              "dataType": "boolean"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "TEST2",
+      "name": "Automated Tests",
+      "message": "These test will run automatically",
+      "enabled": "true",
+      "subtests": {
+        "executionType": "sequential",
+        "tests": [
+          {
+            "id": "TEST2_SUBTEST1",
+            "name": "Inspection Check I - 2",
+            "message": "Are manual clamps removed ?",
+            "enabled": "true",
+            "typeCommand": "PassFail",
+            "userInput": {
+              "type": "boolean"
+            },
+            "commandResult": {
+              "dataType": "boolean"
+            }
+          },
+          {
+            "id": "TEST2_SUBTEST2",
+            "name": "Read speed value and validate",
+            "message": "Reading speed value ...",
+            "enabled": "true",
+            "scpiCommand": "SPEED?",
+            "commandResult": {
+              "dataType": "number",
+              "match": "1.0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "TEST3",
+      "name": "Parent test 3",
+      "message": "this will be message for parent 3",
+      "enabled": "true",
+      "subtests": {
+        "executionType": "sequential",
+        "tests": [
+          {
+            "id": "TEST3_SUBTEST1",
+            "name": "Inspection Check I - 3",
+            "message": "Are tubes attached firmly ?",
+            "enabled": "true",
+            "typeCommand": "PassFail",
+            "userInput": {
+              "type": "boolean"
+            },
+            "commandResult": {
+              "dataType": "boolean"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "TEST4",
+      "name": "User Input Test (Number)",
+      "message": "These test take in user inputs",
+      "enabled": "true",
+      "subtests": {
+        "executionType": "sequential",
+        "tests": [
+          {
+            "id": "TEST4_SUBTEST1",
+            "name": "Inspection Check I - 4",
+            "message": "Are tubes attached firmly ?",
+            "enabled": "true",
+            "typeCommand": "PassFail",
+            "userInput": {
+              "type": "boolean"
+            },
+            "commandResult": {
+              "dataType": "boolean"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

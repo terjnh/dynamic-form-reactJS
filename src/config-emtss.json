@@ -1,0 +1,204 @@
+[
+  {
+    "executionType": "sequential",
+    "tests": [
+      {
+        "id": "TEST1",
+        "name": "Inspection Checks 123",
+        "message": "User to input Pass/Fail for each sub-test",
+        "enabled": "true",
+        "subtests": {
+          "executionType": "sequential",
+          "tests": [
+            {
+              "id": "TEST1_SUBTEST1",
+              "name": "Inspection Check I",
+              "message": "Are manual clamps removed ?",
+              "enabled": "true",
+              "typeCommand": "PassFail",
+              "userInput": {
+                "type": "boolean"
+              },
+              "commandResult": {
+                "dataType": "boolean"
+              }
+            },
+            {
+              "id": "TEST1_SUBTEST2",
+              "name": "Inspection Check II",
+              "message": "Are tubes attached firmly ?",
+              "enabled": "true",
+              "typeCommand": "PassFail",
+              "userInput": {
+                "type": "boolean"
+              },
+              "commandResult": {
+                "dataType": "boolean"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "TEST2",
+        "name": "Automated Tests",
+        "message": "These test will run automatically",
+        "enabled": "true",
+        "subtests": {
+          "executionType": "sequential",
+          "tests": [
+            {
+              "id": "TEST2_SUBTEST1",
+              "name": "Unlock Rocker Lid",
+              "message": "Sending unlock command ...",
+              "enabled": "true",
+              "scpiCommand": "COVERUNLOCK",
+              "scpiCommandParam": "",
+              "skipOnFailure": "",
+              "commandResult": {
+                "dataType": "regex",
+                "match": "OK COVERUNLOCK"
+              }
+            },
+            {
+              "id": "TEST2_SUBTEST2",
+              "name": "Read speed value and validate",
+              "message": "Reading speed value ...",
+              "enabled": "true",
+              "scpiCommand": "SPEED?",
+              "commandResult": {
+                "dataType": "number",
+                "match": "1.0"
+              }
+            },
+            {
+              "id": "TEST2_SUBTEST3",
+              "name": "Stop Rocker",
+              "message": "Sending Rocker Stop Command ...",
+              "enabled": "true",
+              "scpiCommand": "ROCKerSTOP",
+              "scpiCommandParam": "",
+              "skipOnFailure": "",
+              "commandResult": {
+                "dataType": "regex",
+                "match": "(^OK ).*"
+              }
+            },
+            {
+              "id": "TEST2_SUBTEST4",
+              "name": "Read speed between a range",
+              "message": "Reading speed value ...",
+              "enabled": "true",
+              "scpiCommand": "SPEED?",
+              "commandResult": {
+                "dataType": "number",
+                "lowerLimit": "0.95",
+                "upperLimit": "1.05"
+              }
+            },
+            {
+              "id": "TEST2_SUBTEST5",
+              "name": "Lock Rocker lid",
+              "message": "Sending lock Command ...",
+              "enabled": "true",
+              "scpiCommand": "COVERLOCK",
+              "scpiCommandParam": "",
+              "skipOnFailure": "%TEST2_SUBTEST4%",
+              "commandResult": {
+                "dataType": "regex",
+                "match": "(^OK ).*"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "TEST3",
+        "name": "User Input Test (Number)",
+        "message": "These test take in user inputs",
+        "enabled": "true",
+        "subtests": {
+          "executionType": "sequential",
+          "tests": [
+            {
+              "id": "TEST3_SUBTEST1",
+              "name": "Get number from user",
+              "message": "Enter a number..",
+              "enabled": "true",
+              "userInput": {
+                "type": "data",
+                "dataType": "number"
+              }
+            },
+            {
+              "id": "TEST3_SUBTEST2",
+              "name": "Write number to a file",
+              "message": "Writing number to file /tmp/number.dat ...",
+              "enabled": "true",
+              "scpiCommand": "FILe:WRITe -encoding=plain tmp:number.dat",
+              "scpiCommandParam": "%TEST3_SUBTEST1%",
+              "skipOnFailure": "%TEST3_SUBTEST1%",
+              "commandResult": {
+                "dataType": "regex",
+                "match": "(^OK ).*"
+              }
+            },
+            {
+              "id": "TEST3_SUBTEST3",
+              "name": "Pause",
+              "message": "Pause and await user action",
+              "enabled": "true",
+              "userInput": {
+                "type": "action"
+              }
+            },
+            {
+              "id": "TEST3_SUBTEST4",
+              "name": "Read number from file and match within range",
+              "message": "Reading number from file number.dat...",
+              "enabled": "true",
+              "scpiCommand": "FILe:READ? -encoding=plain tmp:number.dat",
+              "commandResult": {
+                "dataType": "number",
+                "lowerLimit": "0",
+                "upperLimit": "10"
+              }
+            },
+            {
+              "id": "TEST3_SUBTEST5",
+              "name": "Read number from file and match exact",
+              "message": "Reading number from file number.dat...",
+              "enabled": "true",
+              "scpiCommand": "FILe:READ? -encoding=plain tmp:number.dat",
+              "commandResult": {
+                "dataType": "number",
+                "match": "7"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "TEST4",
+        "name": "User Input Test (String)",
+        "message": "These test take in user inputs",
+        "enabled": "true",
+        "subtests": {
+          "executionType": "sequential",
+          "tests": [
+            {
+              "id": "TEST4_SUBTEST1",
+              "name": "Get string from user",
+              "message": "Enter a string value",
+              "enabled": "true",
+              "userInput": {
+                "type": "data",
+                "dataType": "string"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
